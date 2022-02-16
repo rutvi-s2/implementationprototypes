@@ -84,7 +84,44 @@
 	</div>
 	<script>
     
-	  // your solution here
+	  var rotateB = document.getElementById('rotate-box');
+    var rotateHam = new Hammer (rotateB);
+    rotateHam.get('rotate').set({enable: true});
+    rotateHam.on("rotate", function(){
+      rotateB.style.backgroundColor = 'pink' ;
+    });
+
+	  var pinchB = document.getElementById('pinch-box');
+    var pinchHam = new Hammer (pinchB);
+    pinchHam.get('pinch').set({enable: true});
+    pinchHam.on("pinch", function(){
+      $("#pinch-box").stop().animate({height : "200px", width : "200px"});
+    });
+
+    var pressB = document.getElementById('press-box');
+    var pressHam = new Hammer (pressB);
+    pressHam.on("press", function(){
+      pressB.style.backgroundColor = 'green' ;  
+    });
+
+    var panB = document.getElementById('pan-box');
+    var panHam = new Hammer (panB);
+    panHam.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+    panHam.on("pan", function(){
+      panB.style.backgroundColor = 'red' ;  
+    });
+
+    var tapB = document.getElementById('tap-box');
+    var tapHam = new Hammer (tapB);
+    tapHam.on("tap", function(){
+      tapB.style.backgroundColor = 'orange' ;  
+    });
+
+    var swipeB = document.getElementById('swipe-box');
+    var swipeHam = new Hammer (swipeB);
+    swipeHam.on("swipe", function(){
+      swipeB.style.backgroundColor = 'blue' ;  
+    });
 
   </script>
 </body>
