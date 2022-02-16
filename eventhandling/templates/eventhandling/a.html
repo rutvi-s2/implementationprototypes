@@ -64,6 +64,27 @@
 <script type="text/javascript">
 
 	// your solution here
+$('.bg-purple').on("click", function() {
+  $('.bg-purple').hide();
+});
+
+$('.bg-green').on("click", function() {
+  $('.bg-green').hide();
+  $('.bg-blue').hide();
+});
+
+$('.bg-orange.p2-border').on("click", function() {
+  $('.bg-orange.p2-border').hide();
+  $(this).show();
+});
+
+$('#gradient-circle').hover(function() {
+    $('#gradient-circle').hide();
+});
+
+$('.btn.btn-light.float-right').on("click", function() {
+  $('.p2-circle').show();
+});
 
 </script>
 </body>
