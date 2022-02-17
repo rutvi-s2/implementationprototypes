@@ -68,6 +68,32 @@
 				}
 			}
 
+			// Set up the mandala interactivity.
+      function myGradientInteraction(){
+          var tool = new paper.Tool();
+          var rectangle = new paper.Rectangle(260, 310, 200, 100);
+          var path = new paper.Path.Rectangle(rectangle);
+          path.fillColor = 'red';
+
+          var redRect;
+          tool.onMouseDown = function (event) {
+            redRect = event.point;
+          }
+          tool.onMouseUp = function (event) {
+            var destPoint = event.point;
+            var firstCol = cp.history[cp.history.length - 1];
+            var secondCol = cp.history[cp.history.length - 2];
+
+            path.fillColor = {
+              gradient:{
+                stops: [secondCol, firstCol]
+              },
+              origin: redRect,
+              destination: destPoint
+            }
+          }
+      }
+
 			// create a color palette with the given colors
 			function createColorPalette(colors){
 
@@ -112,10 +138,8 @@
 				});
 			}
 
-			// Set up the mandala interactivity.
-      
       // set to false once you've defined "myGradientInteraction" as a new function (following a similar setup as myCustomInteraction)
-			init(true);
+			init(false);
 		}
 	</script>
 </head>
