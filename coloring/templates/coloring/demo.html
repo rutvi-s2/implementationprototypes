@@ -58,12 +58,22 @@
 			function myCustomInteraction() {
 				var tool = new paper.Tool();
 
-				tool.onMouseDown = function (event) {
+        var mandalaShape;
+        tool.onMouseDown = function (event) {
+          mandalaShape = event.point;
+        }
+				tool.onMouseUp = function (event) {
 				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
 				    if (hit) {
 				    		// Color pallette keeps track of the full history of colors, though we
 				    		// only color in with the most-recent color.
-				        hit.item.fillColor = cp.history[cp.history.length - 1];
+				        hit.item.fillColor = {
+                  gradient:{
+                stops: [cp.history[cp.history.length - 2], cp.history[cp.history.length - 1]]
+                  },
+                  origin: mandalaShape,
+                  destination: event.point               
+                }
 				    }
 				}
 			}
@@ -81,12 +91,10 @@
           }
           tool.onMouseUp = function (event) {
             var destPoint = event.point;
-            var firstCol = cp.history[cp.history.length - 1];
-            var secondCol = cp.history[cp.history.length - 2];
 
             path.fillColor = {
               gradient:{
-                stops: [secondCol, firstCol]
+                stops: [cp.history[cp.history.length - 2], cp.history[cp.history.length - 1]]
               },
               origin: redRect,
               destination: destPoint
@@ -139,7 +147,7 @@
 			}
 
       // set to false once you've defined "myGradientInteraction" as a new function (following a similar setup as myCustomInteraction)
-			init(false);
+			init(true);
 		}
 	</script>
 </head>
